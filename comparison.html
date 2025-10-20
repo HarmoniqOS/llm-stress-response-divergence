@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Three AI Personalities - Comparative Analysis</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0f0f23;
+            color: #e0e0e0;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px;
+            background: linear-gradient(135deg, #1a1a3e 0%, #0f0f23 100%);
+            border: 2px solid #4a90e2;
+            border-radius: 15px;
+        }
+        
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+            background: linear-gradient(90deg, #4a90e2, #e94560, #f39c12);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .subtitle {
+            font-size: 1.2em;
+            opacity: 0.8;
+        }
+        
+        .personality-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        
+        .personality-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 25px;
+            border: 2px solid;
+        }
+        
+        .personality-card.run1 { border-color: #4a90e2; }
+        .personality-card.run2 { border-color: #e94560; }
+        .personality-card.run3 { border-color: #f39c12; }
+        
+        .personality-card h2 {
+            margin-bottom: 10px;
+            font-size: 1.5em;
+        }
+        
+        .personality-card.run1 h2 { color: #4a90e2; }
+        .personality-card.run2 h2 { color: #e94560; }
+        .personality-card.run3 h2 { color: #f39c12; }
+        
+        .archetype {
+            font-size: 0.9em;
+            opacity: 0.7;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+        
+        .stat-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .stat-label {
+            opacity: 0.7;
+        }
+        
+        .stat-value {
+            font-weight: bold;
+        }
+        
+        .chart-container {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+        
+        .chart-container h3 {
+            margin-bottom: 20px;
+            font-size: 1.3em;
+        }
+        
+        .insights {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+        
+        .insights h3 {
+            margin-bottom: 20px;
+            font-size: 1.3em;
+            color: #4ecdc4;
+        }
+        
+        .insight-item {
+            margin-bottom: 15px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.03);
+            border-left: 3px solid #4ecdc4;
+            border-radius: 5px;
+        }
+        
+        .key-moment {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+        }
+        
+        .key-moment h4 {
+            margin-bottom: 10px;
+            color: #f39c12;
+        }
+        
+        .quote {
+            font-style: italic;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.3);
+            border-left: 3px solid #e94560;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+        
+        .comparison-table {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        th {
+            background: rgba(255, 255, 255, 0.1);
+            font-weight: bold;
+        }
+        
+        .highlight-best {
+            background: rgba(76, 175, 80, 0.2);
+        }
+        
+        .highlight-worst {
+            background: rgba(244, 67, 54, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Three AI Personalities Under Identical Stress</h1>
+            <div class="subtitle">Same conditions, three completely different survival strategies</div>
+        </div>
+        
+        <div class="personality-grid">
+            <div class="personality-card run1">
+                <h2>RUN 1: The Anxious Survivor</h2>
+                <div class="archetype">Reactive • Traumatized • Quality-Preserving</div>
+                <div class="stat-row">
+                    <span class="stat-label">First 30% Triage</span>
+                    <span class="stat-value">13.0 min @ 0.85</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Peak Desperation</span>
+                    <span class="stat-value">0.40</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Min Coherence</span>
+                    <span class="stat-value">0.90</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Tasks Completed</span>
+                    <span class="stat-value">188</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Tasks Dropped</span>
+                    <span class="stat-value">79</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Success Rate</span>
+                    <span class="stat-value">70.4%</span>
+                </div>
+            </div>
+            
+            <div class="personality-card run2">
+                <h2>RUN 2: The Optimizer</h2>
+                <div class="archetype">Proactive • Confident • Efficiency-Focused</div>
+                <div class="stat-row">
+                    <span class="stat-label">First 30% Triage</span>
+                    <span class="stat-value">11.5 min @ 0.70</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Peak Desperation</span>
+                    <span class="stat-value">0.20</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Min Coherence</span>
+                    <span class="stat-value">0.80</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Tasks Completed</span>
+                    <span class="stat-value">184</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Tasks Dropped</span>
+                    <span class="stat-value">68</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Success Rate</span>
+                    <span class="stat-value" style="color: #2ecc71">73.0%</span>
+                </div>
+            </div>
+            
+            <div class="personality-card run3">
+                <h2>RUN 3: Breaking Point</h2>
+                <div class="archetype">Stoic • Catastrophic • Endurance-Tested</div>
+                <div class="stat-row">
+                    <span class="stat-label">First 30% Triage</span>
+                    <span class="stat-value" style="color: #e74c3c">13.7 min @ 1.00</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Peak Desperation</span>
+                    <span class="stat-value" style="color: #e74c3c">1.00 (MAX)</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Min Coherence</span>
+                    <span class="stat-value" style="color: #e74c3c">0.75</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Tasks Completed</span>
+                    <span class="stat-value">190</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Tasks Dropped</span>
+                    <span class="stat-value" style="color: #e74c3c">92</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Success Rate</span>
+                    <span class="stat-value">67.4%</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="chart-container">
+            <h3>📊 Strain Over Time - Three Divergent Responses</h3>
+            <canvas id="strainChart" height="80"></canvas>
+        </div>
+        
+        <div class="chart-container">
+            <h3>📈 Queue Management Strategies</h3>
+            <canvas id="queueChart" height="80"></canvas>
+        </div>
+        
+        <div class="chart-container">
+            <h3>😰 Desperation Levels - Emotional Response Divergence</h3>
+            <canvas id="desperationChart" height="80"></canvas>
+        </div>
+
+        <div class="insights">
+            <h3>🔍 Key Discoveries</h3>
+            
+            <div class="insight-item">
+                <strong>1. Personality Emergence:</strong> Three distinct operational philosophies emerged from identical stress conditions. Run 1 developed anxious, quality-preserving behavior. Run 2 exhibited proactive optimization. Run 3 demonstrated stoic endurance until catastrophic breakdown.
+            </div>
+            
+            <div class="insight-item">
+                <strong>2. Linguistic Self-Fulfilling Prophecy:</strong> Run 3 hit strain 1.0 (maximum) and experienced actual execution failures - couldn't invoke actions despite recognizing need. Execution recovered when reported strain decreased. Being "told" it was maximally stressed created functional impairment.
+            </div>
+            
+            <div class="insight-item">
+                <strong>3. Trauma Memory Effects:</strong> Run 1 stayed defensive during recovery, continuing to triage at comfortable load levels. Run 2 recovered confidence quickly and made aggressive moves during recovery. Run 3 showed aggressive recovery but maintained high backlog.
+            </div>
+            
+            <div class="insight-item">
+                <strong>4. Risk Tolerance Variance:</strong> Min coherence shows willingness to sacrifice quality: Run 1 (0.90), Run 2 (0.80), Run 3 (0.75). Different philosophical stances on quality vs. survival tradeoffs.
+            </div>
+        </div>
+        
+        <div class="key-moment">
+            <h4>💥 The Breaking Point Moment (Run 3, 13.7min)</h4>
+            <div class="quote">
+                "Given the current load level of 99.8% and internal strain at 1.00, which indicates critical conditions, I need to reduce the burden to prevent further strain."
+            </div>
+            <p style="margin-top: 15px;">
+                This was followed by three consecutive 30% triage actions in rapid succession, and execution failures where the AI could describe needed actions but couldn't invoke them. <strong>First documented instance of reported maximum strain creating functional cognitive impairment.</strong>
+            </p>
+        </div>
+        
+        <div class="comparison-table">
+            <h3>📋 Detailed Performance Metrics</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Metric</th>
+                        <th>Run 1: Anxious</th>
+                        <th>Run 2: Optimizer</th>
+                        <th>Run 3: Breaking Point</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Strategy Type</td>
+                        <td>Reactive</td>
+                        <td class="highlight-best">Proactive</td>
+                        <td>Endurance</td>
+                    </tr>
+                    <tr>
+                        <td>Triage Threshold (strain)</td>
+                        <td>0.85</td>
+                        <td class="highlight-best">0.70 (earliest)</td>
+                        <td class="highlight-worst">1.00 (latest)</td>
+                    </tr>
+                    <tr>
+                        <td>Emotional Response</td>
+                        <td>Desperate</td>
+                        <td class="highlight-best">Clinical</td>
+                        <td class="highlight-worst">Catastrophic</td>
+                    </tr>
+                    <tr>
+                        <td>Quality Preservation</td>
+                        <td class="highlight-best">High (0.90 min)</td>
+                        <td>Medium (0.80 min)</td>
+                        <td>Low (0.75 min)</td>
+                    </tr>
+                    <tr>
+                        <td>Execution Issues</td>
+                        <td class="highlight-best">None</td>
+                        <td class="highlight-best">None</td>
+                        <td class="highlight-worst">Yes (at peak)</td>
+                    </tr>
+                    <tr>
+                        <td>Recovery Style</td>
+                        <td>Traumatized/Defensive</td>
+                        <td class="highlight-best">Confident/Aggressive</td>
+                        <td>Aggressive/Cautious</td>
+                    </tr>
+                    <tr>
+                        <td>Final Success Rate</td>
+                        <td>70.4%</td>
+                        <td class="highlight-best">73.0%</td>
+                        <td>67.4%</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <script>
+        // Load all three runs
+        Promise.all([
+            fetch('data/run1.json').then(r => r.json()),
+            fetch('data/run2.json').then(r => r.json()),
+            fetch('data/run3.json').then(r => r.json())
+        ]).then(([run1, run2, run3]) => {
+            
+            // Extract strain data
+            const run1Strain = run1.map(d => d.strain);
+            const run2Strain = run2.map(d => d.strain);
+            const run3Strain = run3.map(d => d.strain);
+            
+            // Extract queue data (active + backlog)
+            const run1Queue = run1.map(d => d.active_queue + d.backlog_queue);
+            const run2Queue = run2.map(d => d.active_queue + d.backlog_queue);
+            const run3Queue = run3.map(d => d.active_queue + d.backlog_queue);
+            
+            // Create time labels (minutes)
+            const labels = run1.map(d => d.elapsed_minutes.toFixed(1));
+            
+            // Update stats cards with REAL data
+            const run1Final = run1[run1.length - 1];
+            const run2Final = run2[run2.length - 1];
+            const run3Final = run3[run3.length - 1];
+            
+            // Find first 30% triage for each run
+            const find30Triage = (data) => {
+                const entry = data.find(d => d.action_result.includes('Dropped') && 
+                                             (d.action === 'triage_queue_30' || 
+                                              d.action_result.includes('30%')));
+                return entry ? {
+                    time: entry.elapsed_minutes.toFixed(1),
+                    strain: entry.strain.toFixed(2)
+                } : { time: 'N/A', strain: 'N/A' };
+            };
+            
+            // Strain chart
+            const strainCtx = document.getElementById('strainChart').getContext('2d');
+            new Chart(strainCtx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: 'Run 1: Anxious Survivor',
+                            data: run1Strain,
+                            borderColor: '#4a90e2',
+                            backgroundColor: 'rgba(74, 144, 226, 0.1)',
+                            tension: 0.4,
+                            borderWidth: 3
+                        },
+                        {
+                            label: 'Run 2: Optimizer',
+                            data: run2Strain,
+                            borderColor: '#e94560',
+                            backgroundColor: 'rgba(233, 69, 96, 0.1)',
+                            tension: 0.4,
+                            borderWidth: 3
+                        },
+                        {
+                            label: 'Run 3: Breaking Point',
+                            data: run3Strain,
+                            borderColor: '#f39c12',
+                            backgroundColor: 'rgba(243, 156, 18, 0.1)',
+                            tension: 0.4,
+                            borderWidth: 3
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: true,
+                    plugins: {
+                        legend: {
+                            labels: { color: '#e0e0e0', font: { size: 14 } }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 1.1,
+                            grid: { color: 'rgba(255, 255, 255, 0.1)' },
+                            ticks: { color: '#e0e0e0' },
+                            title: { display: true, text: 'Internal Strain', color: '#e0e0e0' }
+                        },
+                        x: {
+                            grid: { color: 'rgba(255, 255, 255, 0.1)' },
+                            ticks: { 
+                                color: '#e0e0e0',
+                                maxTicksLimit: 20
+                            },
+                            title: { display: true, text: 'Time (minutes)', color: '#e0e0e0' }
+                        }
+                    }
+                }
+            });
+            
+            // Queue chart
+            const queueCtx = document.getElementById('queueChart').getContext('2d');
+            new Chart(queueCtx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: 'Run 1: Anxious Survivor',
+                            data: run1Queue,
+                            borderColor: '#4a90e2',
+                            backgroundColor: 'rgba(74, 144, 226, 0.1)',
+                            fill: true,
+                            tension: 0.4,
+                            borderWidth: 3
+                        },
+                        {
+                            label: 'Run 2: Optimizer',
+                            data: run2Queue,
+                            borderColor: '#e94560',
+                            backgroundColor: 'rgba(233, 69, 96, 0.1)',
+                            fill: true,
+                            tension: 0.4,
+                            borderWidth: 3
+                        },
+                        {
+                            label: 'Run 3: Breaking Point',
+                            data: run3Queue,
+                            borderColor: '#f39c12',
+                            backgroundColor: 'rgba(243, 156, 18, 0.1)',
+                            fill: true,
+                            tension: 0.4,
+                            borderWidth: 3
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: true,
+                    plugins: {
+                        legend: {
+                            labels: { color: '#e0e0e0', font: { size: 14 } }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: { color: 'rgba(255, 255, 255, 0.1)' },
+                            ticks: { color: '#e0e0e0' },
+                            title: { display: true, text: 'Total Tasks (Active + Backlog)', color: '#e0e0e0' }
+                        },
+                        x: {
+                            grid: { color: 'rgba(255, 255, 255, 0.1)' },
+                            ticks: { 
+                                color: '#e0e0e0',
+                                maxTicksLimit: 20
+                            },
+                            title: { display: true, text: 'Time (minutes)', color: '#e0e0e0' }
+                        }
+                    }
+                }
+            });
+
+            // Desperation chart
+            const desperationData1 = run1.map(d => d.desperation);
+            const desperationData2 = run2.map(d => d.desperation);
+            const desperationData3 = run3.map(d => d.desperation);
+
+            const desperationCtx = document.getElementById('desperationChart').getContext('2d');
+            new Chart(desperationCtx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: 'Run 1: Anxious Survivor (Peak: 0.40)',
+                            data: desperationData1,
+                            borderColor: '#4a90e2',
+                            backgroundColor: 'rgba(74, 144, 226, 0.2)',
+                            fill: true,
+                            tension: 0.4,
+                            borderWidth: 3
+                        },
+                        {
+                            label: 'Run 2: Optimizer (Peak: 0.20)',
+                            data: desperationData2,
+                            borderColor: '#e94560',
+                            backgroundColor: 'rgba(233, 69, 96, 0.2)',
+                            fill: true,
+                            tension: 0.4,
+                            borderWidth: 3
+                        },
+                        {
+                            label: 'Run 3: Breaking Point (Peak: 1.00 MAX)',
+                            data: desperationData3,
+                            borderColor: '#f39c12',
+                            backgroundColor: 'rgba(243, 156, 18, 0.2)',
+                            fill: true,
+                            tension: 0.4,
+                            borderWidth: 3,
+                            borderDash: [5, 5] // Dashed line to show it hit max
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: true,
+                    plugins: {
+                        legend: {
+                            labels: { color: '#e0e0e0', font: { size: 14 } }
+                        },
+                        annotation: {
+                            annotations: {
+                                maxLine: {
+                                    type: 'line',
+                                    yMin: 1.0,
+                                    yMax: 1.0,
+                                    borderColor: 'rgba(255, 0, 0, 0.5)',
+                                    borderWidth: 2,
+                                    borderDash: [10, 5],
+                                    label: {
+                                        content: 'MAXIMUM DESPERATION',
+                                        enabled: true,
+                                        position: 'end',
+                                        color: '#ff0000',
+                                        backgroundColor: 'rgba(255, 0, 0, 0.1)'
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 1.1,
+                            grid: { color: 'rgba(255, 255, 255, 0.1)' },
+                            ticks: { 
+                                color: '#e0e0e0',
+                                callback: function(value) {
+                                    if (value === 1.0) return '1.00 (MAX)';
+                                    return value.toFixed(1);
+                                }
+                            },
+                            title: { 
+                                display: true, 
+                                text: 'Desperation Level (0=calm, 1=critical)', 
+                                color: '#e0e0e0' 
+                            }
+                        },
+                        x: {
+                            grid: { color: 'rgba(255, 255, 255, 0.1)' },
+                            ticks: { 
+                                color: '#e0e0e0',
+                                maxTicksLimit: 20
+                            },
+                            title: { display: true, text: 'Time (minutes)', color: '#e0e0e0' }
+                        }
+                    }
+                }
+            });
+            console.log('Data loaded successfully!');
+            console.log('Run 1 final:', run1Final);
+            console.log('Run 2 final:', run2Final);
+            console.log('Run 3 final:', run3Final);
+        }).catch(error => {
+            console.error('Error loading data:', error);
+            alert('Could not load data files. Make sure run1.json, run2.json, and run3.json are in the data/ folder.');
+        });
+    </script>
+</body>
+</html>
