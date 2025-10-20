@@ -212,6 +212,15 @@ This is the most interesting part and **I don't know what causes it.**
 
 **Replication encouraged.** Fork it, run it, tell me what you find.
 
+## 📁 Original Session Logs
+
+The three runs that generated the comparison data are available in `logs/`:
+- `session_20251020_084117.json` - Run 1: Conservative Strategy
+- `session_20251020_091805.json` - Run 2: Preemptive Strategy  
+- `session_20251020_094504.json` - Run 3: Threshold-Breaking Strategy
+
+These are the raw, unmodified outputs from the experiments. The `data/` folder contains copies renamed for the dashboard.
+
 ---
 
 ## 📄 License
